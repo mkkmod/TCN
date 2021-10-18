@@ -40,6 +40,8 @@ class TemporalBlock(nn.Module):
             self.downsample.weight.data.normal_(0, 0.01)
 
     def forward(self, x):
+        if (self.conv1.weight.data != self.conv1.weight.data).any():
+            print("weight is NAN")
         out = self.net(x)
         res = x if self.downsample is None else self.downsample(x)
         return self.relu(out + res)
